@@ -10,6 +10,17 @@ namespace RockPaperScissorsGitExample
     {
         static void Main(string[] args)
         {
+            Console.Write("Введите ваш ход: ");
+            
+        }
+
+
+        //ф-я рандомно возвращает один из ходов: камень, ножницы или бумагу
+        static string GetRandomStep()
+        {
+            string[] steps = new string[3] { "Камень", "Бумага", "Ножницы" };
+            int index = new Random().Next(0, 3);
+            return steps[index];
         }
     }
 }
