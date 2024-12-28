@@ -17,12 +17,28 @@ namespace RockPaperScissorsGitExample
 
         static void Main(string[] args)
         {
-            Console.Write("Ваш ход: ");
-            string userStep = Console.ReadLine();
-            string pcStep = GetRandomStep();
-            Console.WriteLine($"Ваш ход - {userStep}\nХод компьютера - {pcStep}");
-            Console.WriteLine($"Итог игры - {GetTheWinner(userStep, pcStep)}");
-
+            while (true)
+            {
+                Console.Write("Ваш ход: ");
+                string userStep = Console.ReadLine();
+                userStep = UserStepValidation(userStep);
+                if(userStep == "Некорректный ход")
+                {
+                    Console.WriteLine(userStep);
+                }
+                else
+                {
+                    string pcStep = GetRandomStep();
+                    Console.WriteLine($"Ваш ход - {userStep}; Ход компьютера - {pcStep}");
+                    Console.WriteLine($"Итог игры - {GetTheWinner(userStep, pcStep)}");
+                }
+                Console.Write("Введите \"1\", чтобы продолжить: ");
+                if (Console.ReadLine() != "1")
+                {
+                    break;
+                }
+                Console.Clear();
+            }
 
 
         }
@@ -34,6 +50,26 @@ namespace RockPaperScissorsGitExample
             string[] steps = new string[3] { ROCK, PAPER, SCISSORS };
             int index = new Random().Next(0, 3);
             return steps[index];
+        }
+
+        //ф-я валидации введеного пользователем хода
+        static string UserStepValidation(string userStep)
+        {
+            //валидируем ход пользователя
+            userStep = userStep.ToLower();
+            string firstLetter = userStep[0].ToString().ToUpper();
+            userStep = userStep.Remove(0, 1);
+            userStep = userStep.Insert(0, firstLetter);
+            
+            if(!$"{ROCK}; {PAPER}; {SCISSORS}".Contains(userStep))
+            {
+                return "Некорректный ход";
+            }
+            else
+            {
+                return userStep;
+            }
+
         }
 
         //ф-я определяет, кто выиграл
