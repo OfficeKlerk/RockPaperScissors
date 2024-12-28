@@ -18,9 +18,10 @@ namespace RockPaperScissorsGitExample
         static void Main(string[] args)
         {
             Console.Write("Ваш ход: ");
-            string step = Console.ReadLine();
-            Console.WriteLine($"Ваш ход - {step}\nХод компьютера - {GetRandomStep()}");
-            Console.WriteLine($"");
+            string userStep = Console.ReadLine();
+            string pcStep = GetRandomStep();
+            Console.WriteLine($"Ваш ход - {userStep}\nХод компьютера - {pcStep}");
+            Console.WriteLine($"Итог игры - {GetTheWinner(userStep, pcStep)}");
 
 
 
